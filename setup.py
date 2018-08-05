@@ -22,6 +22,10 @@ long_description = readme_path.read_text()
 # Core dependencies
 install_requires = [
     'click>=6.7,<7.0',
+    'uritemplate',
+    'aiohttp>=3.0.0',
+    'cchardet',  # recommended speed-up for aiohttp
+    'aiodns',  # recommended speed-up for aiohttp
 ]
 
 # Setup dependencies

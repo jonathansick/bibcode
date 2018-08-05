@@ -5,6 +5,8 @@ __all__ = ('main',)
 
 import click
 
+from .entry import entry
+
 # Add -h as a help shortcut option
 CONTEXT_SETTINGS = dict(help_option_names=['-h', '--help'])
 
@@ -39,3 +41,6 @@ def help(ctx, topic, **kw):
         click.echo(ctx.parent.get_help())
     else:
         click.echo(main.commands[topic].get_help(ctx))
+
+
+main.add_command(entry)
