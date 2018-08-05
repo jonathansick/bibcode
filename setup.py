@@ -26,6 +26,7 @@ install_requires = [
     'aiohttp>=3.0.0',
     'cchardet',  # recommended speed-up for aiohttp
     'aiodns',  # recommended speed-up for aiohttp
+    'pyperclip',
 ]
 
 # Setup dependencies

@@ -7,6 +7,7 @@ import asyncio
 
 import aiohttp
 import click
+import pyperclip
 from uritemplate import expand
 
 ADS_FORMATS = [
@@ -45,8 +46,12 @@ ADS_FORMATS = [
     help='If using a ``custom`` format, specify this format. See '
          'http://adsabs.github.io/help/actions/export for details.'
 )
+@click.option(
+    '--copy/--no-copy', 'clipboard', default=True,
+    help='Copy the entry to the clipboard.'
+)
 @click.pass_context
-def entry(ctx, bibcode, format, custom_format):
+def entry(ctx, bibcode, format, custom_format, clipboard):
     """Convert a bibcode into a bibliographic entry.
 
     **Formats**
@@ -80,6 +85,10 @@ def entry(ctx, bibcode, format, custom_format):
         _run(bibcode, format, custom_format, token))
 
     click.echo(result)
+
+    if clipboard:
+        pyperclip.copy(result)
+        click.echo('📎 Copied to clipboard')
 
 
 async def _run(bibcode, format, custom_format, token):
