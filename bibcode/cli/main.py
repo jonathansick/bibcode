@@ -10,13 +10,21 @@ CONTEXT_SETTINGS = dict(help_option_names=['-h', '--help'])
 
 
 @click.group(context_settings=CONTEXT_SETTINGS)
+@click.option(
+    '--token',
+    envvar='ADS_KEY',
+    help='Your ADS API token. You can also set this the $ADS_KEY environment '
+         'variable.'
+)
 @click.pass_context
-def main(ctx):
+def main(ctx, token):
     """bibcode helps you work with NASA/SAO ADS bibcodes from the command line.
     """
     # Subcommands should use the click.pass_obj decorator to get this
     # ctx.obj object as the first argument.
-    ctx.obj = {}
+    ctx.obj = {
+        'token': token
+    }
 
 
 @main.command()
